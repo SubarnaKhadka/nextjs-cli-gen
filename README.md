@@ -15,7 +15,7 @@ Make sure you have **Node.js** and **npm** installed on your system.
 
 ### Install the CLI Tool
 ```bash
-npm install --g nextjs-cli-gen
+npm install -g nextjs-cli-gen
 ```
 
 or
@@ -87,3 +87,35 @@ export const loginAction = async (values: z.infer<typeof LoginSchema>) => {
 ```
 
 ## Page ( `gen page` )
+
+| Command | Result |
+| ------- | ------ |
+| `gen page` | Prompts: "What's your page name?" After providing a name, it generates a directory with a `.tsx` file, e.g., **login** directory with `page.tsx` and component name **Login**. |
+| `gen page --name=login` | it generates a directory with a `.tsx` file. **login** directory with `page.tsx` and component name **Login**. |
+| `gen page ./auth --name=login` | Generates an `auth` folder. Within it, a **login** directory is created containing a `page.tsx` file, with the component name set to **Login**. |
+
+### Example Flow
+- When the --name flag is not given, user is prompted with "What's your page name?", and the name provided is `login`, the result is:
+  - A `login` directory created.
+  - Inside it, a `page.tsx` file is generated.
+  - The component name inside the `page.tsx` file is set to `Login`.
+
+
+#### Demo code generated 
+```js
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login',
+  description: '',
+}
+
+export default function Login(){
+    return (
+     <div>Login page</div>
+    )
+}
+
+```
+
+## Component ( `gen component` )
