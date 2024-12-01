@@ -15,6 +15,11 @@
     "gen": "./bin/index.js"
   },
   "author": "subarna khadka",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SubarnaKhadka/nextjs-cli-gen.git"
+  },
+  "homepage": "https://github.com/SubarnaKhadka/nextjs-cli-gen#readme",
   "license": "ISC",
   "dependencies": {
     "boxen": "^8.0.1",
