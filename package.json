@@ -1,0 +1,28 @@
+{
+  "name": "nextjs-cli-gen",
+  "version": "1.0.5",
+  "description": "A CLI tool to generate React components with boilerplate code",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nextjs cli",
+    "nextjs files manager"
+  ],
+  "bin": {
+    "gen": "./bin/index.js"
+  },
+  "author": "subarna khadka",
+  "license": "ISC",
+  "dependencies": {
+    "boxen": "^8.0.1",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "figlet": "^1.8.0",
+    "inquirer": "^12.1.0",
+    "ora": "^8.1.1",
+    "yargs": "^17.7.2"
+  }
+}
