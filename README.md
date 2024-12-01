@@ -119,8 +119,6 @@ export default function Login(){
 ```
 
 ## Component ( `gen component` )
- 
- `The component available are: [Form, Default]`
 
 | Command | Result |
 | ------- | ------ |
@@ -131,12 +129,14 @@ export default function Login(){
 ### Example Flow
 The user is prompted with **Select the component you want**, and the result is: `eg`: For `Form`, the Form component is generated along with the form fields validation `schema` and the `action`.
 
-![Screenshots 1](/screenshots/screenshot-1.PNG)
+- ![Screenshots 1](/screenshots/screenshot-1.PNG)
 
 You can create customized components  with defined schematics.
 
-![Screenshots 2](/screenshots/screenshot-2.PNG)
+- ![Screenshots 2](/screenshots/screenshot-2.PNG)
 
-![Screenshots 3](/screenshots/screenshot-3.PNG)
+- ![Screenshots 3](/screenshots/screenshot-3.PNG)
 
-![Screenshots 4](/screenshots/screenshot-4.PNG)
+- ![Screenshots 4](/screenshots/screenshot-4.PNG)
+
+ `The component available are: [Form, Default]`
