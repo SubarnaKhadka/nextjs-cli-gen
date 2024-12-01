@@ -119,7 +119,6 @@ export default function Login(){
 ```
 
 ## Component ( `gen component` )
-
 | Command | Result |
 | ------- | ------ |
 | `gen component` | Prompts: "Select the component you want?". |
@@ -139,4 +138,146 @@ You can create customized components  with defined schematics.
 
 - ![Screenshots 4](/screenshots/screenshot-4.PNG)
 
- `The component available are: [Form, Default]`
+ #### Demo code generated 
+
+```js
+import * as z from "zod";
+
+import { EmailSchema, PasswordSchema } from "@/schemas/common";
+
+export const LoginFormSchema = z.object({
+  email: EmailSchema,
+  password: PasswordSchema,
+});
+
+```
+```js
+import * as z from 'zod';
+
+export const EmailSchema = z
+    .string({
+        invalid_type_error: "Invalid email field",
+        required_error: "email is required",
+    })
+    .email("Please provide a valid email")
+    .min(1, "Email is too short");
+
+export const PasswordSchema = z
+    .string({
+        invalid_type_error: "Invalid password field",
+        required_error: "password is required",
+    })
+    .min(6, "Password must be at least 6 characters");
+
+```
+
+```js
+"use client"
+
+import React, { useCallback } from "react";
+
+import * as z from "zod";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+ import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+
+import { cn } from "@/lib/utils";
+import { useMutation } from "@/hooks";
+import { LoginFormSchema } from "@/schemas";
+import { LoginFormAction } from "./actions/LoginForm.action.ts";
+import FormError from "@/components/form/form-error";
+import { zodResolver } from "@hookform/resolvers/zod";
+    
+interface LoginFormProps {}
+
+const LoginForm = (props: Readonly<LoginFormProps>): JSX.Element => {
+     const form = useForm<z.infer<typeof LoginFormSchema>>({
+    resolver: zodResolver(LoginFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+   const [mutate, { error, isLoading }] = useMutation(LoginFormAction, {
+    onError: (err) => {
+      toast.error(err);
+    },
+    onSuccess: () => {
+      toast.success("Login successfully");
+      form.reset();
+    },
+  });
+
+    const submit = useCallback(
+    (values: z.infer<typeof LoginFormSchema>) => {
+      mutate(values);
+    },
+    [mutate]
+  );
+
+  return (
+     <Form {...form}>
+        <form onSubmit={form.handleSubmit(submit)} className="space-y-6">
+          <div className="space-y-4">    
+          <FormField
+              control={form.control}
+              name='email'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                          {...field}
+                          placeholder="Please Enter email"
+                          type="email"
+                        />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+					<FormField
+              control={form.control}
+              name='password'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                          {...field}
+                          placeholder="Please Enter password"
+                          type="password"
+                        />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+          <FormError message={error} />
+
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? "Submitting..." : "Submit"}
+          </Button>
+          </div>
+        </form>
+      </Form>
+  )
+    }
+
+export default LoginForm;
+
+```
+`The component available are: [Form, Default]`
