@@ -14,7 +14,8 @@
     "nextjs files manager"
   ],
   "bin": {
-    "gen": "./bin/index.js"
+    "gen": "./bin/index.js",
+    "gen:studio": "esbuild GUI/root.client.js --bundle --loader:.js=jsx --outfile=GUI/public/bundle.js --format=cjs --jsx=automatic && node ./GUI/root.server.mjs"
   },
   "author": "subarna khadka",
   "repository": {

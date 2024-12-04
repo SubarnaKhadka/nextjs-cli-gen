@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import path from "path";
 import express from "express";
 
@@ -17,7 +19,7 @@ app.get("/tree", (req, res) => {
 
 app.post("/exec-cmd", (req, res) => {
   const { schematic, path, name, schema, props } = req.body;
-  
+
   generate(schematic, name, path, schema, props);
   res.status(200).send("ok");
 });
