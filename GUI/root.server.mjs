@@ -11,16 +11,9 @@ import { getFolderStructure } from "./server/utils.mjs";
 
 const app = express();
 
-
 export const __filename = fileURLToPath(import.meta.url);
-export const __dirname = path.dirname(__filename);
 
-console.log(__dirname);
-
-
-app.use(express.static(path.join(__dirname, "GUI", "public")));
-
-console.log(process.cwd())
+app.use(express.static(path.join(path.dirname(__filename), "public")));
 
 app.use(express.json());
 
