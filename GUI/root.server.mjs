@@ -11,7 +11,13 @@ const app = express();
 
 app.use(express.static(path.join(process.cwd(), "GUI", "public")));
 
+console.log(process.cwd())
+
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(process.cwd(),  "GUI", "public"));
+});
 
 app.get("/tree", (req, res) => {
   const tree = getFolderStructure(path.join(process.cwd()));
