@@ -283,4 +283,4 @@ export default LoginForm;
 `The component available are: [Form, Default]`
 
 `The GUI web application also available: http://localhost:8080`
-`npm run start`
+`npx studio`

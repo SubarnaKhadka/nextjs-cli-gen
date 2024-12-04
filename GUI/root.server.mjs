@@ -5,7 +5,6 @@ import express from "express";
 import open from "open";
 import { fileURLToPath } from "url";
 
-
 import generate from "../bin/utils/generate.mjs";
 import { getFolderStructure } from "./server/utils.mjs";
 
@@ -31,5 +30,5 @@ app.post("/exec-cmd", (req, res) => {
 
 app.listen(8080, () => {
   console.log(`Studio running on port 8080`);
-  open(`http://localhost:8080`);
+  open(`http://localhost:8080`, { app: { name: "google chrome" } });
 });
