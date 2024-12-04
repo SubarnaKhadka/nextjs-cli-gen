@@ -14,9 +14,10 @@ import newPageTemplate from "../templates/page.mjs";
 import newDefaultComponentTemplate from "../templates/defined-components/default.mjs";
 import { runCommandComponent } from "../commands/component-command.mjs";
 import newAction from "../templates/action.mjs";
+import { generateComponent } from "../commands/command.mjs";
 
-export default function generate(element, name, currPath, schema) {
-  if (!isAtTheRootOfANextJsProject()) {
+export default function generate(element, name, currPath, schema, props) {
+  if (isAtTheRootOfANextJsProject()) {
     let targetDir = isUsingSrcDirectory()
       ? path.join(process.cwd(), "src/app")
       : path.join(process.cwd(), "app");
@@ -43,7 +44,12 @@ export default function generate(element, name, currPath, schema) {
           }
 
           const pageComponentName = capitalize(pageName);
-          targetDir = path.join(targetDir, normalized, pageName);
+
+          const normalizedPath = path.normalize(
+            currPath.replace(/^\.\/app\//, "./")
+          );
+
+          targetDir = path.join(targetDir, normalizedPath, pageName);
 
           if (fs.existsSync(targetDir)) {
             terminalError(`page ${pageName} already exists`);
@@ -66,6 +72,12 @@ export default function generate(element, name, currPath, schema) {
 
       case "component":
       case "c":
+        if (props) {
+          const normalizedPath = path.normalize(
+            currPath.replace(/^\.\/components\//, "./")
+          );
+          return generateComponent(name, normalizedPath, props);
+        }
         inquirer
           .prompt([
             {
@@ -117,12 +129,16 @@ export default function generate(element, name, currPath, schema) {
 
         const actionName = name ? name + "Action" : "Action";
 
+        const normalizedPath = path.normalize(
+          currPath.replace(/^\.\/actions\//, "./")
+        );
+
         targetDir = path.join(
           isUsingSrcDirectory()
             ? path.join(process.cwd(), "src")
             : process.cwd(),
           "actions",
-          normalized
+          normalizedPath
         );
 
         if (!fs.existsSync(targetDir)) {
