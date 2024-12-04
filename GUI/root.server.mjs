@@ -3,21 +3,26 @@
 import path from "path";
 import express from "express";
 import open from "open";
+import { fileURLToPath } from "url";
+
 
 import generate from "../bin/utils/generate.mjs";
 import { getFolderStructure } from "./server/utils.mjs";
 
 const app = express();
 
-app.use(express.static(path.join(process.cwd(), "GUI", "public")));
+
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
+
+console.log(__dirname);
+
+
+app.use(express.static(path.join(__dirname, "GUI", "public")));
 
 console.log(process.cwd())
 
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(process.cwd(),  "GUI", "public"));
-});
 
 app.get("/tree", (req, res) => {
   const tree = getFolderStructure(path.join(process.cwd()));
