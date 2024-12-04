@@ -284,3 +284,5 @@ export default LoginForm;
 
 `The GUI web application also available: http://localhost:8080`
 `npx studio`
+
+- ![Screenshots 5](/screenshots/screenshot-5.PNG)
